@@ -34,6 +34,6 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/tv_title"
-    tools:listitem="@layout/item_game_wide" />
+    tools:listitem="@layout/item_game_thin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
