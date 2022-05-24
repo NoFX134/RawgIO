@@ -1,4 +1,4 @@
-package ru.myproject.gamenewsapp.ui.main
+package ru.myproject.gamenewsapp.adapters
 
 import ru.myproject.gamenewsapp.ui.base.ListItem
 

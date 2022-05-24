@@ -1,4 +1,4 @@
-package ru.myproject.gamenewsapp.ui.main
+package ru.myproject.gamenewsapp.adapters
 
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
@@ -6,6 +6,8 @@ import ru.myproject.gameNewsAPP.databinding.ItemGameThinBinding
 import ru.myproject.gameNewsAPP.databinding.ItemGameWideBinding
 import ru.myproject.gameNewsAPP.databinding.ItemGamesHorizontalBinding
 import ru.myproject.gamenewsapp.ui.base.ListItem
+import ru.myproject.gamenewsapp.ui.main.GameThinItem
+import ru.myproject.gamenewsapp.ui.main.GameWideItem
 
 object MainScreenDelegates {
 
