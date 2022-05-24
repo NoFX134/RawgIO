@@ -1,4 +1,4 @@
-package ru.myproject.gamenewsapp.ui
+package ru.myproject.gamenewsapp.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
