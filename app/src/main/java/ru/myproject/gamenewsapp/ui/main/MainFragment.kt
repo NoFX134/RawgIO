@@ -1,4 +1,4 @@
-package ru.myproject.rawgio.ui.main
+package ru.myproject.gamenewsapp.ui.main
 
 import android.os.Bundle
 import android.view.LayoutInflater

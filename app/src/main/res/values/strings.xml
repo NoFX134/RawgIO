@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">RawgIO</string>
+    <string name="app_name">GameNewsApp</string>
+    <string name="top_upcoming">Топ новинок</string>
 </resources>

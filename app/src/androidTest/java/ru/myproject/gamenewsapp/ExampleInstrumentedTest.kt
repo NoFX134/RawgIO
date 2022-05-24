@@ -1,4 +1,4 @@
-package ru.myproject.rawgio
+package ru.myproject.gamenewsapp
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

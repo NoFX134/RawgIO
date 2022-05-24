@@ -1,4 +1,4 @@
-package ru.myproject.rawgio
+package ru.myproject.gamenewsapp
 
 import org.junit.Test
 
