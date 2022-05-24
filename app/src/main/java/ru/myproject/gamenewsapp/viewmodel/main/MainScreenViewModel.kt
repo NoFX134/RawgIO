@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import ru.myproject.gamenewsapp.adapters.GamesHorizontalItem
-import ru.myproject.gamenewsapp.ui.base.ListItem
-import ru.myproject.gamenewsapp.ui.main.GameThinItem
-import ru.myproject.gamenewsapp.ui.main.GameWideItem
+import ru.myproject.gamenewsapp.model.game.GamesHorizontalItem
+import ru.myproject.gamenewsapp.model.base.ListItem
+import ru.myproject.gamenewsapp.model.game.GameThinItem
+import ru.myproject.gamenewsapp.model.game.GameWideItem
 import ru.myproject.gamenewsapp.viewmodel.base.BaseViewModel
 
 class MainScreenViewModel : BaseViewModel() {
@@ -16,11 +16,9 @@ class MainScreenViewModel : BaseViewModel() {
 
   init {
     viewModelScope.launch {
-      val items = getItems()
+       val items = getItems()
       _data.postValue(items)
     }
-
-
   }
 
   private suspend fun getItems(): List<ListItem> {
@@ -38,10 +36,5 @@ class MainScreenViewModel : BaseViewModel() {
         games = IntRange(1, 20).map { GameWideItem(it.toLong(), "Game Title $it") }
       )
     )
-  }
-
-  override fun onCleared() {
-
-    super.onCleared()
   }
 }
