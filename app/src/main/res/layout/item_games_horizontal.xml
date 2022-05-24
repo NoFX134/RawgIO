@@ -14,22 +14,26 @@
     android:layout_marginTop="40dp"
     android:layout_marginEnd="16dp"
     android:fontFamily="sans-serif-medium"
-    android:text="@string/top_upcoming"
     android:textColor="@color/categoryTitleText"
     android:textSize="24sp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintTop_toTopOf="parent"
+    tools:text="@string/top_upcoming" />
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/rv_recycleView"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:clipToPadding="false"
+    android:orientation="horizontal"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/tv_title"
-    app:orientation="horizontal"
-    tools:listitem="@layout/item_games_wide" />
+    tools:listitem="@layout/item_game_wide" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
