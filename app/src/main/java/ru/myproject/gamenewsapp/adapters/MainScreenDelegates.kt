@@ -9,6 +9,7 @@ import ru.myproject.gamenewsapp.model.base.ListItem
 import ru.myproject.gamenewsapp.model.game.GameThinItem
 import ru.myproject.gamenewsapp.model.game.GameWideItem
 import ru.myproject.gamenewsapp.model.game.GamesHorizontalItem
+import ru.myproject.gamenewsapp.model.game.ProgressWideItem
 
 object MainScreenDelegates {
 
@@ -26,9 +27,22 @@ object MainScreenDelegates {
         binding.tvTitle.text = item.title
         (binding.rvRecycleView.adapter as ListDelegationAdapter<List<ListItem>>).apply {
           items = item.games
+          notifyDataSetChanged()
         }
       }
     }
+
+  private val wideProgressDelegate =
+    adapterDelegateViewBinding<ProgressWideItem, ListItem, ItemGameWideBinding>(
+      { inflater, container -> ItemGameWideBinding.inflate(inflater, container, false) }
+    ) {
+      bind {
+        binding.ivImageView.setBackgroundColor(item.title.hashCode())
+        binding.title = item.title
+        binding.executePendingBindings()
+      }
+    }
+
   private val wideGameDelegate =
     adapterDelegateViewBinding<GameWideItem, ListItem, ItemGameWideBinding>(
       { inflater, container -> ItemGameWideBinding.inflate(inflater, container, false) }
@@ -39,6 +53,7 @@ object MainScreenDelegates {
         binding.executePendingBindings()
       }
     }
+
   private val thinGameDelegate =
     adapterDelegateViewBinding<GameThinItem, ListItem, ItemGameThinBinding>(
       { inflater, container -> ItemGameThinBinding.inflate(inflater, container, false) }

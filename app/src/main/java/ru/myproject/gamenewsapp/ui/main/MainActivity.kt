@@ -1,10 +1,9 @@
 package ru.myproject.gamenewsapp.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import ru.myproject.gameNewsAPP.R
 import ru.myproject.gameNewsAPP.databinding.ActivityMainBinding
-import ru.myproject.gamenewsapp.ui.main.MainFragment
 
 
 class MainActivity : AppCompatActivity() {
