@@ -3,37 +3,94 @@ package ru.myproject.gamenewsapp.viewmodel.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import ru.myproject.gamenewsapp.model.game.GamesHorizontalItem
 import ru.myproject.gamenewsapp.model.base.ListItem
-import ru.myproject.gamenewsapp.model.game.GameThinItem
-import ru.myproject.gamenewsapp.model.game.GameWideItem
+import ru.myproject.gamenewsapp.model.game.*
+import ru.myproject.gamenewsapp.network.di.NetworkComponent
 import ru.myproject.gamenewsapp.viewmodel.base.BaseViewModel
 
 class MainScreenViewModel : BaseViewModel() {
+  private val api = NetworkComponent.retrofit
   private val _data = MutableLiveData<List<ListItem>>()
   val data: LiveData<List<ListItem>> = _data
 
   init {
-    viewModelScope.launch {
-       val items = getItems()
+    viewModelScope.launch(Dispatchers.IO) {
+      _data.postValue(getLoaders())
+      val items = getItems()
       _data.postValue(items)
     }
   }
 
-  private suspend fun getItems(): List<ListItem> {
+  private fun getLoaders(): List<ListItem> {
     return listOf(
       GamesHorizontalItem(
         title = "Wide Games Title",
-        games = IntRange(1, 20).map { GameWideItem(it.toLong(), "Game Title $it") }
+        games = IntRange(1, 2).map { ProgressWideItem }
       ),
       GamesHorizontalItem(
         title = "Thin Games Title",
-        games = IntRange(1, 20).map { GameThinItem(it.toLong(), "Game Title $it") }
+        games = IntRange(1, 3).map { ProgressThinItem }
       ),
       GamesHorizontalItem(
         title = "Wide Games Title",
-        games = IntRange(1, 20).map { GameWideItem(it.toLong(), "Game Title $it") }
+        games = IntRange(1, 20).map { ProgressWideItem }
+      )
+    )
+  }
+
+  private suspend fun getItems(): List<ListItem> {
+    val topUpcomingResponse = api.games(
+      mapOf(
+        "dates" to "2022-05-25,2023-05-25",
+        "ordering" to "-added"
+      )
+    )
+    val latestReleasesResponse = api.games(
+      mapOf(
+        "dates" to "2022-04-25,2022-05-25"
+      )
+    )
+    val mostRatedResponse = api.games(
+      mapOf(
+        "dates" to "2022-01-01,2022-05-25",
+        "ordering" to "-rating"
+      )
+    )
+    val topUpcoming = topUpcomingResponse.result.map {
+      GameWideItem(
+        id = it.id,
+        title = it.title,
+        imageUrl = it.image
+      )
+    }
+    val latestReleases = latestReleasesResponse.result.map {
+      GameThinItem(
+        id = it.id,
+        title = it.title,
+        imageUrl = it.image
+      )
+    }
+    val mostRated = mostRatedResponse.result.map {
+      GameWideItem(
+        id = it.id,
+        title = it.title,
+        imageUrl = it.image
+      )
+    }
+    return listOf(
+      GamesHorizontalItem(
+        title = "Топ ожидаемых",
+        games = topUpcoming
+      ),
+      GamesHorizontalItem(
+        title = "Новинки",
+        games = latestReleases
+      ),
+      GamesHorizontalItem(
+        title = "Рейтинговые игры 2022",
+        games = mostRated
       )
     )
   }

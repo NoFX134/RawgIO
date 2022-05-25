@@ -1,3 +1,5 @@
 package ru.myproject.gamenewsapp.model.base
 
-interface ListItem
+interface ListItem{
+  val itemId: Long
+}
