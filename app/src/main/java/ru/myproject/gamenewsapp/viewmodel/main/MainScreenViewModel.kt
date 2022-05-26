@@ -5,12 +5,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import ru.myproject.gameNewsAPP.R
 import ru.myproject.gamenewsapp.model.base.ListItem
 import ru.myproject.gamenewsapp.model.game.*
+import ru.myproject.gamenewsapp.network.api.RawgApi
 import ru.myproject.gamenewsapp.network.di.NetworkComponent
+import ru.myproject.gamenewsapp.util.ResourceProvider
 import ru.myproject.gamenewsapp.viewmodel.base.BaseViewModel
+import javax.inject.Inject
 
-class MainScreenViewModel : BaseViewModel() {
+class MainScreenViewModel @Inject constructor(
+  private val resources: ResourceProvider,
+
+) : BaseViewModel() {
   private val api = NetworkComponent.retrofit
   private val _data = MutableLiveData<List<ListItem>>()
   val data: LiveData<List<ListItem>> = _data
@@ -26,15 +33,15 @@ class MainScreenViewModel : BaseViewModel() {
   private fun getLoaders(): List<ListItem> {
     return listOf(
       GamesHorizontalItem(
-        title = "Wide Games Title",
+        title = resources.string(R.string.top_upcoming),
         games = IntRange(1, 2).map { ProgressWideItem }
       ),
       GamesHorizontalItem(
-        title = "Thin Games Title",
+        title = resources.string(R.string.latest_releases),
         games = IntRange(1, 3).map { ProgressThinItem }
       ),
       GamesHorizontalItem(
-        title = "Wide Games Title",
+        title = resources.string(R.string.rated_in_2022),
         games = IntRange(1, 20).map { ProgressWideItem }
       )
     )

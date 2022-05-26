@@ -7,9 +7,9 @@ import ru.myproject.gamenewsapp.model.base.ListItem
 
 class GamesHorizontalAdapter: AsyncListDifferDelegationAdapter<ListItem>(BaseUtilItemCallback()) {
   init {
-    delegatesManager.addDelegate(MainScreenDelegates.wideGameDelegate)
-    delegatesManager.addDelegate(MainScreenDelegates.thinGameDelegate)
-    delegatesManager.addDelegate(MainScreenDelegates.wideProgressDelegate)
-    delegatesManager.addDelegate(MainScreenDelegates.thinProgressDelegate)
+    delegatesManager.addDelegate(MainScreenDelegates.wideGameDelegate())
+    delegatesManager.addDelegate(MainScreenDelegates.thinGameDelegate())
+    delegatesManager.addDelegate(MainScreenDelegates.wideProgressDelegate())
+    delegatesManager.addDelegate(MainScreenDelegates.thinProgressDelegate())
   }
 }
