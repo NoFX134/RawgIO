@@ -14,7 +14,7 @@ import ru.myproject.gamenewsapp.model.game.*
 
 object MainScreenDelegates {
 
-  fun gamesHorizontalDelegate() =
+  fun gamesHorizontalDelegate(onItemBind:(GamesHorizontalItem)->Unit) =
     adapterDelegateViewBinding<GamesHorizontalItem, ListItem, ItemGamesHorizontalBinding>(
       { inflater, container ->
         ItemGamesHorizontalBinding.inflate(inflater, container, false)
@@ -23,6 +23,7 @@ object MainScreenDelegates {
       val adapter = GamesHorizontalAdapter()
       binding.rvRecycleView.adapter = adapter
       bind {
+        onItemBind.invoke(item)
         binding.tvTitle.text = item.title
         adapter.items = item.games
       }

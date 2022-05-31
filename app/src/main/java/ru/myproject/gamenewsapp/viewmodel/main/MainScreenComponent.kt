@@ -62,4 +62,6 @@ abstract class MainScreenModule {
   @Binds
   @ScreenScope
   abstract fun mainScreenInteractor(interactor: MainScreenInteractorImpl): MainScreenInteractor
+
+
 }

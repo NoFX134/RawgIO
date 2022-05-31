@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import ru.myproject.gamenewsapp.interactor.main.MainScreenInteractor
 import ru.myproject.gamenewsapp.interactor.main.MainScreenInteractorImpl
 import ru.myproject.gamenewsapp.model.base.ListItem
+import ru.myproject.gamenewsapp.model.game.GamesHorizontalItem
 import ru.myproject.gamenewsapp.util.ResourceProvider
 import ru.myproject.gamenewsapp.viewmodel.base.BaseViewModel
 import javax.inject.Inject
@@ -18,7 +19,6 @@ import javax.inject.Inject
 @ExperimentalCoroutinesApi
 @FlowPreview
 class MainScreenViewModel @Inject constructor(
-  private val resources: ResourceProvider,
   private val interactor: MainScreenInteractor
 ) : BaseViewModel() {
 
@@ -29,6 +29,13 @@ class MainScreenViewModel @Inject constructor(
     viewModelScope.launch(Dispatchers.IO) {
       interactor.data().collect { _data.postValue(it) }
     }
+  }
+
+  fun initCategory(item: GamesHorizontalItem){
+    viewModelScope.launch(Dispatchers.IO) {
+      interactor.initCategory(item.category)
+    }
+
   }
 }
 

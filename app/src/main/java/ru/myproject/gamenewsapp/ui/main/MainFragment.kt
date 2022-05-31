@@ -19,18 +19,18 @@ class MainFragment : Fragment(R.layout.fragment_main) {
   private val component by lazy {  MainScreenComponent.create()
   }
   private val binding by viewBinding { FragmentMainBinding.bind(it) }
-  private val adapter = MainScreenAdapter()
   private val viewModel by viewModels<MainScreenViewModel> { component.viewModelFactory() }
+  private val adapter by lazy { MainScreenAdapter(onItemBind = viewModel::initCategory) }
+
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     with(binding) {
       rvRecycleView.adapter = adapter
       viewModel.data.observe(viewLifecycleOwner) {
-        adapter.apply {
-          items = it
+        adapter.items = it
         }
       }
     }
   }
-}
+

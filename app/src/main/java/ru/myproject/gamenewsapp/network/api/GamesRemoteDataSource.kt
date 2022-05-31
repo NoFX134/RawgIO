@@ -17,15 +17,19 @@ class GamesRemoteDataSource @Inject constructor(
   private val api: RawgApi
 ) {
 
-  private val channel = ConflatedBroadcastChannel<PagingState<List<GameDTO>>>()
+  private val channel = ConflatedBroadcastChannel<PagingState<List<GameDTO>>>(PagingState.Initial)
+
   suspend fun initialLoading(params: GamesApiParams) {
-    channel.send(PagingState.Initial)
-    val response = api.games(params.toMap())
-    channel.send(PagingState.Content(response.result))
+
+    if (channel.value is PagingState.Initial) {
+      val response = api.games(params.toMap())
+      channel.send(PagingState.Content(response.result))
+    }
   }
 
   suspend fun loadMore() {
 //TODO
   }
+
   fun observe(): Flow<PagingState<List<GameDTO>>> = channel.asFlow()
 }
